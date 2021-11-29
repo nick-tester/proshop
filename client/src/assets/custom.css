@@ -6,3 +6,11 @@
     color: black;
     font-weight: 900;
 }
+
+.product-price {
+    padding: 1rem 0;
+}
+
+.rating span {
+    margin: .1rem; 
+}
