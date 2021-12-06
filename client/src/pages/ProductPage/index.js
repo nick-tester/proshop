@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { Row, Col, Image, ListGroup, ListGroupItem, Card, Button } from "react-bootstrap";
 
@@ -12,9 +13,7 @@ const ProductPage = () => {
 
     const fetchProducts = async () => {
         try {
-            const res = await fetch(url);
-            const data = await res.json();
-
+            const { data } = await axios.get(url);
             setProduct(data.find(p => p._id === id));
         } catch (err) {
             console.error(err.message);
