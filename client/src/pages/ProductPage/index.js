@@ -1,12 +1,30 @@
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Row, Col, Image, ListGroup, ListGroupItem, Card, Button } from "react-bootstrap";
 
 import Rating from "../../components/RatingStars";
-import products from "../../assets/products";
+const url = "http://localhost:5000/api/products";
 
 const ProductPage = () => {
+    const [product, setProduct] = useState({});
+
     const { id } = useParams();
-    const product = products.find(product => product._id === id);
+
+    const fetchProducts = async () => {
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+
+            setProduct(data.find(p => p._id === id));
+        } catch (err) {
+            console.error(err.message);
+        }
+    };
+
+    useEffect(() => {
+        fetchProducts();
+        // eslint-disable-next-line
+    }, []);
 
     function addToCart() {
         console.log("Add to cart");
