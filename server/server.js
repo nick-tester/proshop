@@ -3,8 +3,10 @@ import dotenv from "dotenv";
 
 import productRoutes from "./routes/product_routes.js";
 import setHeaders from "./assets/set_headers.js";
+import connectDB from "./assets/db.js";
 
 dotenv.config();
+connectDB();
 
 const server = express();
 
