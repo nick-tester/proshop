@@ -8,7 +8,9 @@
     "start": "cd server && node server",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
     "client": "cd client && npm start",
-    "server": "cd server && npm run server"
+    "server": "cd server && npm run server",
+    "data:import": "cd server && node assets/seeder",
+    "data:destroy": "cd server && node assets/seeder -d"
   },
   "repository": {
     "type": "git",
