@@ -11,7 +11,7 @@ export default async function connectDB() {
             dbName: "proshop2"
         });
 
-        console.log(`MongoDB connected: ${conn.connection.host}`);
+        console.log(`MongoDB connected: ${conn.connection.host}`.cyan);
     } catch (err) {
         console.error(`Error: ${error.message}`);
         process.exit(1)

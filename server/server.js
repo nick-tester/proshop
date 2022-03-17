@@ -1,10 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
+import "colors";
 
-import setHeaders from "./assets/set_headers.js";
-import connectDB from "./assets/db.js";
-import productRoutes from "./routes/product_routes.js";
-import authRoutes from "./routes/auth_routes.js";
+import { connectDB, setHeaders, notFound, errorHandler } from "./assets/index.js";
+import { authRoutes, productRoutes } from "./routes/index.js";
 
 dotenv.config();
 connectDB();
@@ -17,6 +16,10 @@ server.use(setHeaders);
 server.use("/api/products", productRoutes);
 server.use("/api/auth", authRoutes);
 
+server.use(notFound);
+
+server.use(errorHandler);
+
 const NODE_ENV = process.env.NODE_ENV;
-const PORT = process.env.PORT;
-server.listen(5000, () => console.log(`Server running in ${NODE_ENV} on port ${PORT}`));
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => console.log(`Server running in ${NODE_ENV} mode on port ${PORT}`.blue));
