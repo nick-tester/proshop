@@ -1,13 +1,14 @@
-import { Row, Col } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 
 const Loading = () => {
     return (
-        <Row>
-            <Col sm={12} md={6} lg={4} xl={3}>
-                <h1>Loading...</h1>
-            </Col>
-        </Row>
+        <Spinner
+            animation="border"
+            role="status"
+            style={{ width: "100px", height: "100px", margin: "auto", display: "block" }}>
+            <span className="sr-only">loading...</span>
+        </Spinner>
     )
-}
+};
 
 export default Loading;

@@ -4,6 +4,7 @@ import { Row, Col } from "react-bootstrap";
 
 import { getProducts } from "../../assets/redux/actions/productActions";
 import Loading from "../../components/Loading";
+import Message from "../../components/Message";
 import Product from "./Product";
 
 const HomePageMain = () => {
@@ -24,15 +25,17 @@ const HomePageMain = () => {
     return (
         <>
             <h1>Late Products</h1>
-            <Row>
-                {products.map(product => {
-                    return (
-                        <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                            <Product product={product} />
-                        </Col>
-                    )
-                })}
-            </Row>
+            {loading ? <Loading /> : error ? <Message variant="danger">{error}</Message> : (
+                <Row>
+                    {products.map(product => {
+                        return (
+                            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                                <Product product={product} />
+                            </Col>
+                        )
+                    })}
+                </Row>
+            )}
         </>
     )
 }
