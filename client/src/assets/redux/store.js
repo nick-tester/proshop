@@ -4,7 +4,11 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import reducers from "./reducers";
 
-const initialState = {};
+const storedCartItems = localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [];
+
+const initialState = {
+    cart: { cartItems: storedCartItems }
+};
 
 const middlewares = [thunk];
 
