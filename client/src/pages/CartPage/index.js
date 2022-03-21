@@ -1,20 +1,23 @@
 import { Outlet } from "react-router-dom";
+import { Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
+
+import CartItems from "./CartItemsColumn";
+import CartTotals from "./CartTotalsColumn";
 
 const CartPage = () => {
     const cartItems = useSelector(state => state.cart.cartItems);
 
     return (
         <>
-            <h3>cart page</h3>
-
-            {cartItems.length > 0 ? (
-                <ul style={{ listStyle: "none" }}>
-                    {cartItems.map(item => {
-                        return <li key={item.product}>{item.name} | {item.qty}</li>
-                    })}
-                </ul>
-            ) : <h3>your cart is empty</h3>}
+            <Row>
+                <Col md={8}>
+                    <CartItems cartItems={cartItems} />
+                </Col>
+                <Col md={4}>
+                    <CartTotals cartItems={cartItems} />
+                </Col>
+            </Row>
 
             <Outlet />
         </>
