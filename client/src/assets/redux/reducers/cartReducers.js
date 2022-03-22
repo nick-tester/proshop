@@ -21,8 +21,11 @@ const cartReducer = (state = cartInitialState, action) => {
                 return { ...state, cartItems: [...state.cartItems, payload] }
             }
 
-        // case CART_REM_ITEM:
-        //     return {}
+        case CART_REM_ITEM:
+            return {
+                ...state,
+                cartItems: state.cartItems.filter(x => x.product !== payload)
+            };
 
         default:
             return state;

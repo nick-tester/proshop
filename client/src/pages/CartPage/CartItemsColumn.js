@@ -4,13 +4,13 @@ import { Row, Col, ListGroup, ListGroupItem, Image, Form, Button } from "react-b
 import { FaTrash } from "react-icons/fa";
 
 import Message from "../../components/Message";
-import { cartAddItem } from "../../assets/redux/actions/cartActions";
+import { cartAddItem, cartRemoveItem } from "../../assets/redux/actions/cartActions";
 
 const CartItemsColumn = ({ cartItems }) => {
     const dispatch = useDispatch();
 
-    const cartRemoveItem = id => {
-        console.log(id);
+    const removeItemHandler = id => {
+        dispatch(cartRemoveItem(id));
     };
 
     return (
@@ -46,7 +46,7 @@ const CartItemsColumn = ({ cartItems }) => {
                                         <Button
                                             type="button"
                                             variant="light"
-                                            onClick={() => cartRemoveItem(product)}
+                                            onClick={() => removeItemHandler(product)}
                                         ><FaTrash color="red" /></Button>
                                     </Col>
                                 </Row>
