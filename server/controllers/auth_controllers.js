@@ -2,6 +2,8 @@ import User from "../assets/models/User.js";
 import asyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs";
 
+import generateToken from "../assets/utils/tokenGenerator.js";
+
 const login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
@@ -15,7 +17,7 @@ const login = asyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            token: null
+            token: generateToken(user._id)
         });
     } else {
         res.status(401)
