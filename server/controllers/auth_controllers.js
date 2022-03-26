@@ -4,6 +4,9 @@ import bcrypt from "bcryptjs";
 
 import generateToken from "../assets/utils/tokenGenerator.js";
 
+// @desc    Authenticate user
+// @route   POST /api/auth/login
+// @access  Public
 const login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
@@ -25,6 +28,9 @@ const login = asyncHandler(async (req, res) => {
     }
 });
 
+// @desc    Register and auth user
+// @route   POST /api/auth/register
+// @access  Public
 const register = (req, res) => {
     console.log(req.body);
     res.status(200).send(req.body);

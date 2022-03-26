@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import "colors";
 
 import { connectDB, setHeaders, notFound, errorHandler } from "./assets/index.js";
-import { authRoutes, productRoutes } from "./routes/index.js";
+import { authRoutes, productRoutes, userRoutes } from "./routes/index.js";
 
 dotenv.config();
 connectDB();
@@ -15,6 +15,7 @@ server.use(setHeaders);
 
 server.use("/api/products", productRoutes);
 server.use("/api/auth", authRoutes);
+server.use("/api/user", userRoutes);
 
 server.use(notFound);
 
