@@ -5,10 +5,9 @@ import User from "../assets/models/User.js";
 // @route   GET /api/user/profile
 // @access  Private
 const userProfile = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user.id).select("name email isAdmin");
+    const user = await User.findById(req.user.id).select("-password");
 
-    res.status(200)
-    res.json(user);
+    res.status(200).json(user);
 });
 
 export { userProfile };

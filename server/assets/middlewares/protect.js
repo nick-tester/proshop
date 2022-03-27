@@ -1,7 +1,6 @@
+import "dotenv";
 import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
-import "dotenv";
-import User from "../models/User.js";
 
 const protect = asyncHandler(async (req, res, next) => {
     let token;
@@ -14,7 +13,11 @@ const protect = asyncHandler(async (req, res, next) => {
 
             req.user = { id: decoded.id }
             next();
-        } catch (err) { }
+        } catch (err) {
+            console.log(err.message);
+            res.status(401)
+            throw new Error("Invalid credentials!")
+        }
     }
 
     if (!token) {
