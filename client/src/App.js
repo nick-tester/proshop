@@ -18,6 +18,9 @@ const App = () => {
                         <Route path="/cart" element={<Page.Cart />}>
                             <Route path=":id" element={<Page.CartQuery />} />
                         </Route>
+                        <Route path="/auth">
+                            <Route path="login" element={<Page.Login />} />
+                        </Route>
                     </Routes>
                 </Container>
             </main>
