@@ -31,9 +31,31 @@ const login = asyncHandler(async (req, res) => {
 // @desc    Register and auth user
 // @route   POST /api/auth/register
 // @access  Public
-const register = (req, res) => {
-    console.log(req.body);
-    res.status(200).send(req.body);
-};
+const register = asyncHandler(async (req, res) => {
+    const { name, email, password } = req.body;
+
+    let user = await User.findOne({ email });
+
+    if (user) {
+        res.status(400)
+        throw new Error("This email already exist!")
+    }
+
+    user = new User({ name, email, password });
+
+    user.password = await bcrypt.hash(password, await bcrypt.genSalt(10));
+
+    const savedUser = await user.save();
+
+    const newUser = {
+        _id: savedUser._id,
+        name: savedUser.name,
+        email: savedUser.email,
+        isAdmin: savedUser.isAdmin,
+        token: generateToken(savedUser._id)
+    };
+
+    res.status(201).json(newUser);
+});
 
 export { login, register }
