@@ -23,6 +23,8 @@ const loginUser = (formData) => async (dispatch) => {
             type: USER_LOGIN_SUCCESS,
             payload: data
         });
+
+        localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (err) {
         console.log(err.message);
         dispatch({

@@ -1,12 +1,20 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import { loginUser } from "../../assets/redux/actions/userActions";
+import FormContainer from "../../components/FormContainer";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
+    const navigateTo = useNavigate();
+    const location = useLocation();
+    const redirect = location ? location.search.split("=")[1] : "";
+    console.log(redirect);
+    const { userInfo } = useSelector(state => state.login);
 
     const submitHandler = e => {
         e.preventDefault();
@@ -18,30 +26,44 @@ const LoginPage = () => {
         }
     };
 
+    useEffect(() => {
+        if (userInfo && redirect) {
+            navigateTo(redirect);
+        }
+        if (userInfo) {
+            navigateTo("/");
+        }
+    }, [userInfo, navigateTo, redirect]);
+
     return (
-        <>
+        <FormContainer>
             <h2>login</h2>
 
-            <form onSubmit={submitHandler}>
-                <div className="form-group">
-                    <label htmlFor="email">email:</label>
-                    <input
+            <Form onSubmit={submitHandler} className="mb-3">
+                <Form.Group controlId="email">
+                    <Form.Label>email:</Form.Label>
+                    <Form.Control
                         type="email"
-                        id="email"
+                        placeholder="Enter email"
                         value={email}
                         onChange={e => setEmail(e.target.value)} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">password: </label>
-                    <input
+                </Form.Group>
+                <Form.Group controlId="password">
+                    <Form.Label>password: </Form.Label>
+                    <Form.Control
                         type="password"
-                        id="password"
+                        placeholder="Enter password"
                         value={password}
                         onChange={e => setPassword(e.target.value)} />
-                </div>
-                <button type="submit">login</button>
-            </form>
-        </>
+                </Form.Group>
+                <Button type="submit" variant="primary">login</Button>
+            </Form>
+            <Row>
+                <Col>
+                    New customer? <Link to={redirect ? `/auth/register?redirect=${redirect}` : "/auth/register"}>register</Link>
+                </Col>
+            </Row>
+        </FormContainer>
     )
 };
 

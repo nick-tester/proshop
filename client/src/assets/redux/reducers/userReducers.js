@@ -6,7 +6,7 @@ import {
 
 const userLoginInitialState = {
     loading: false,
-    user: {},
+    userInfo: null,
     error: null
 }
 
@@ -18,7 +18,7 @@ const userLoginReducer = (state = userLoginInitialState, action) => {
             return { ...state, loading: true }
 
         case USER_LOGIN_SUCCESS:
-            return { ...state, loading: false, user: payload }
+            return { ...state, loading: false, userInfo: payload }
 
         case USER_LOGIN_FAIL:
             return { ...state, loading: false, error: payload }
