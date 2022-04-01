@@ -13,13 +13,12 @@ const LoginPage = () => {
     const navigateTo = useNavigate();
     const location = useLocation();
     const redirect = location ? location.search.split("=")[1] : "";
-    console.log(redirect);
     const { userInfo } = useSelector(state => state.login);
 
     const submitHandler = e => {
         e.preventDefault();
 
-        if ((!email || !password) || (!email && !password)) {
+        if (!email || !password) {
             console.log("All fields must be field!");
         } else {
             dispatch(loginUser({ email, password }));

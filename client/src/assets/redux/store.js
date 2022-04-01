@@ -17,6 +17,11 @@ const initialState = {
         loading: false,
         userInfo: userInfoFromLocalStorage,
         error: null
+    },
+    register: {
+        loading: false,
+        userInfo: userInfoFromLocalStorage,
+        error: null
     }
 };
 
