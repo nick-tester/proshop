@@ -5,7 +5,8 @@ import {
     USER_LOGIN_FAIL,
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
-    USER_REGISTER_FAIL
+    USER_REGISTER_FAIL,
+    USER_LOGOUT
 } from "../constants/userConstants";
 
 const baseURL = "http://localhost:5000";
@@ -62,4 +63,9 @@ const registerUser = (formData) => async (dispatch) => {
     };
 };
 
-export { loginUser, registerUser };
+const logoutUser = () => dispatch => {
+    localStorage.removeItem("userInfo");
+    dispatch({ type: USER_LOGOUT });
+};
+
+export { loginUser, registerUser, logoutUser };

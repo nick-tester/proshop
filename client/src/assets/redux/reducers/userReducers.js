@@ -4,7 +4,8 @@ import {
     USER_LOGIN_FAIL,
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
-    USER_REGISTER_FAIL
+    USER_REGISTER_FAIL,
+    USER_LOGOUT
 } from "../constants/userConstants";
 
 const userLoginInitialState = {
@@ -25,6 +26,9 @@ const userLoginReducer = (state = userLoginInitialState, action) => {
 
         case USER_LOGIN_FAIL:
             return { ...state, loading: false, error: payload }
+
+        case USER_LOGOUT:
+            return {};
 
         default:
             return state;
