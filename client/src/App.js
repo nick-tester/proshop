@@ -22,6 +22,7 @@ const App = () => {
                             <Route path="login" element={<Page.Login />} />
                             <Route path="register" element={<Page.Register />} />
                         </Route>
+                        <Route path="/profile" element={<Page.Profile />} />
                         <Route path="/test" element={<Page.Test />} />
                     </Routes>
                 </Container>

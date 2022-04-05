@@ -5,7 +5,10 @@ import {
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
     USER_REGISTER_FAIL,
-    USER_LOGOUT
+    USER_LOGOUT,
+    USER_DETAILS_REQUEST,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_FAIL
 } from "../constants/userConstants";
 
 const userLoginInitialState = {
@@ -59,5 +62,22 @@ const userRegisterReducer = (state = userRegisterInitialState, action) => {
     }
 };
 
+const userDetailsReducer = (state = { user: {} }, action) => {
+    const { type, payload } = action;
 
-export { userLoginReducer, userRegisterReducer };
+    switch (type) {
+        case USER_DETAILS_REQUEST:
+            return { ...state, loading: true }
+
+        case USER_DETAILS_SUCCESS:
+            return { ...state, loading: false, user: payload }
+
+        case USER_DETAILS_FAIL:
+            return { ...state, loading: false, error: payload }
+
+        default:
+            return state;
+    }
+};
+
+export { userLoginReducer, userRegisterReducer, userDetailsReducer };

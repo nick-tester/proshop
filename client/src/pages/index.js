@@ -5,6 +5,7 @@ import CartQuery from "./CartPage/CartQuery";
 import Login from "./LoginPage";
 import Register from "./RegisterPage";
 import Test from "./TestPage";
+import Profile from "./ProfilePage";
 
 export {
     Home,
@@ -13,5 +14,6 @@ export {
     CartQuery,
     Login,
     Register,
+    Profile,
     Test
 }

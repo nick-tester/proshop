@@ -6,7 +6,10 @@ import {
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
     USER_REGISTER_FAIL,
-    USER_LOGOUT
+    USER_LOGOUT,
+    USER_DETAILS_REQUEST,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_FAIL
 } from "../constants/userConstants";
 
 const baseURL = "http://localhost:5000";
@@ -68,4 +71,31 @@ const logoutUser = () => dispatch => {
     dispatch({ type: USER_LOGOUT });
 };
 
-export { loginUser, registerUser, logoutUser };
+const getUserDetails = id => async (dispatch, getState) => {
+    try {
+        dispatch({ type: USER_DETAILS_REQUEST });
+
+        const { login: { userInfo } } = getState();
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        };
+
+        const { data } = await axios.get(`${baseURL}/api/user/${id}`, config);
+
+        dispatch({
+            type: USER_DETAILS_SUCCESS,
+            payload: data
+        });
+    } catch (err) {
+        dispatch({
+            type: USER_DETAILS_FAIL,
+            payload: err.response && err.response.data.message ? err.response.data.message : err.message
+        });
+    };
+};
+
+export { loginUser, registerUser, logoutUser, getUserDetails };
