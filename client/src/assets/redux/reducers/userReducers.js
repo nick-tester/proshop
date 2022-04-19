@@ -8,7 +8,10 @@ import {
     USER_LOGOUT,
     USER_DETAILS_REQUEST,
     USER_DETAILS_SUCCESS,
-    USER_DETAILS_FAIL
+    USER_DETAILS_FAIL,
+    USER_UPDATE_DETAILS_REQUEST,
+    USER_UPDATE_DETAILS_SUCCESS,
+    USER_UPDATE_DETAILS_FAIL
 } from "../constants/userConstants";
 
 const userLoginInitialState = {
@@ -42,7 +45,7 @@ const userRegisterInitialState = {
     loading: false,
     userInfo: null,
     error: null
-}
+};
 
 const userRegisterReducer = (state = userRegisterInitialState, action) => {
     const { type, payload } = action;
@@ -62,7 +65,13 @@ const userRegisterReducer = (state = userRegisterInitialState, action) => {
     }
 };
 
-const userDetailsReducer = (state = { user: {} }, action) => {
+const userDetailsInitialState = {
+    loading: false,
+    user: {},
+    error: null
+};
+
+const userDetailsReducer = (state = userDetailsInitialState, action) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -70,14 +79,32 @@ const userDetailsReducer = (state = { user: {} }, action) => {
             return { ...state, loading: true }
 
         case USER_DETAILS_SUCCESS:
-            return { ...state, loading: false, user: payload }
+            return { ...state, loading: false, user: payload, error: null }
 
         case USER_DETAILS_FAIL:
-            return { ...state, loading: false, error: payload }
+            return { ...state, loading: false, user: {}, error: payload }
 
         default:
             return state;
     }
 };
+
+// const userUpdateDetailsReducer = (state = { user: {} }, action) => {
+//     const { type, payload } = action;
+
+//     switch (type) {
+//         case USER_DETAILS_REQUEST:
+//             return { ...state, loading: true }
+
+//         case USER_DETAILS_SUCCESS:
+//             return { ...state, loading: false, user: payload }
+
+//         case USER_DETAILS_FAIL:
+//             return { ...state, loading: false, error: payload }
+
+//         default:
+//             return state;
+//     }
+// };
 
 export { userLoginReducer, userRegisterReducer, userDetailsReducer };

@@ -21,15 +21,19 @@ const ProfilePage = () => {
 
     const submitHandler = e => {
         e.preventDefault();
-        if (!name || !email || !password || !password2) {
-            console.log("All fields must filled!");
-        } else {
+
+        let formData = { name, email };
+
+        if (password) {
             if (password !== password2) {
-                console.log("Password do not match!");
+                alert("Password does not match!");
+                return;
             } else {
-                // dispatch UPDATE PROFILE
+                formData.password = password;
             }
-        }
+        };
+
+        console.log(formData);
     };
 
     useEffect(() => {

@@ -13,6 +13,8 @@ const Header = () => {
     dispatch(logoutUser());
   };
 
+  // BUG: <a> cannot appear as a decendant of <a>
+
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
@@ -28,7 +30,7 @@ const Header = () => {
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                   <NavDropdown.Item>
-                    <Link to="/test" style={{ textDecoration: "none" }}>profile</Link>
+                    <Link to="/profile" style={{ textDecoration: "none" }}>profile</Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item onClick={logoutHandler}>
                     logout
